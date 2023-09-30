@@ -1,3 +1,8 @@
+
+import {  useDispatch } from "react-redux";
+// import { RootState } from "../../redux";
+import { increment } from "../../redux/cartTotalSlice";
+
 interface GoodsParameters {
   goodsName: string;
   goodsDesc: string;
@@ -8,6 +13,9 @@ interface GoodsParameters {
 
 export default function Goods(goodsProps: GoodsParameters) {
   const { goodsName, goodsDesc, goodsPrice,goodsImage } = goodsProps;
+  // const cartTotal = useSelector((state: RootState) => state.cartTotal.value);
+  const dispatch = useDispatch()
+  
   return (
     <div className="card card-compact max-h-md max-w-sm bg-white shadow-xl">
       <figure>
@@ -22,16 +30,17 @@ export default function Goods(goodsProps: GoodsParameters) {
           </div>
         </div>
         <div className="card-actions justify-end">
-          <form action="/cart" method="POST">
+          {/* <form action="/cart" method="POST"> */}
             <button
               type="submit"
               className="btn btn-accent "
               name="selectedItem"
               value={goodsName}
+              onClick={() => dispatch(increment())}
             >
               <i className="fa fa-shopping-cart "/>Add To Cart
-            </button>
-          </form>
+              </button>
+          {/* </form> */}
         </div>
       </div>
     </div>
