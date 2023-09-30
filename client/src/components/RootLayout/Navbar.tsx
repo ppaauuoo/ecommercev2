@@ -1,9 +1,11 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { RootState } from "../../redux";
+import { clear } from "../../redux/cartTotalSlice";
 
 export default function Navbar() {
   const cartTotal = useSelector((state: RootState) => state.cartTotal.value);
+  const dispatch = useDispatch()
 
 
   return (
@@ -47,7 +49,8 @@ export default function Navbar() {
               <Link
                 to="/"
                 className="btn btn-ghost  rounded-full normal-case text-lg"
-              >
+                onClick={() => dispatch(clear())}
+                >
                 <i className="fa-solid fa-cart-shopping" />
                 {cartTotal > 0 && (
                   <div className="badge badge-secondary">{cartTotal}</div>
