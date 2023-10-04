@@ -11,7 +11,7 @@ const sql = require("../helper/sqlCommand.js");
 
 
 router.get("/login", (req, res) => {
-  res.render("login");
+  res.send("login");
 });
 
 router.post("/login", (req, res, next) => {
@@ -22,7 +22,7 @@ router.post("/login", (req, res, next) => {
     }
     if (!user) {
       // Handle authentication failure
-      return res.redirect("/login?authFailure=true");
+      return res.send(false);
     }
     req.logIn(user, (err) => {
       if (err) {
@@ -30,7 +30,7 @@ router.post("/login", (req, res, next) => {
         return next(err);
       }
       // Authentication and login successful
-      return res.redirect("/");
+      return res.send(true);
     });
   })(req, res, next);
 });
@@ -44,7 +44,7 @@ router.get("/register", async (req, res) => {
   const thailand = await sql.queryPromise("SELECT DISTINCT ProvinceThai FROM thailands")
   var userNum = await sql.getLength()
   userNum = (userNum.length).toString().padStart(4, "0");
-  res.render("register", {
+  res.send("register", {
     userNum: userNum,
     sponsor: null,
     thailand: thailand,
@@ -60,7 +60,7 @@ router.get("/register/:sponsor", async (req, res) => {
   const thailand = await sql.queryPromise("SELECT DISTINCT ProvinceThai FROM thailands")
   var userNum = await sql.getLength()
   userNum = (userNum.length).toString().padStart(4, "0");
-  res.render("register", {
+  res.send("register", {
     userNum: userNum,
     sponsor: id,
     thailand: thailand,

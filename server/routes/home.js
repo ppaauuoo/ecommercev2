@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 
   if (!req.isAuthenticated()) {
     return res
-      .json({
+      .send({
         page: "home",
         user: null,
         wallet: null,
