@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "./redux";
 import Login from "./pages/Auth/Login";
 import Error from "./pages/Error";
+import Register from "./pages/Auth/Register";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,8 @@ const router = createBrowserRouter([
       { },
     ],
   },
-  {path: "/login", element: <Login /> }
+  {path: "/login", element: <Login /> },
+  {path: "/register", element: <Register /> }
 ]);
 
 function App() {
